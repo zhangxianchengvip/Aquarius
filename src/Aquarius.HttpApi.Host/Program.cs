@@ -25,7 +25,7 @@ public class Program
             Log.Information("Starting web host.");
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.UseAutofac().UseSerilog();
-            await builder.AddApplicationAsync<AquariusWebModule>();
+            await builder.AddApplicationAsync<AquariusHttpApiHostModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();

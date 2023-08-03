@@ -23,7 +23,7 @@ namespace Aquarius.Web;
     typeof(AquariusEntityFrameworkCoreModule),
     typeof(AbpSwashbuckleModule)
     )]
-public class AquariusWebModule : AbpModule
+public class AquariusHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -35,7 +35,7 @@ public class AquariusWebModule : AbpModule
                 typeof(AquariusDomainSharedModule).Assembly,
                 typeof(AquariusApplicationModule).Assembly,
                 typeof(AquariusApplicationContractsModule).Assembly,
-                typeof(AquariusWebModule).Assembly
+                typeof(AquariusHttpApiHostModule).Assembly
             );
         });
     }
@@ -67,7 +67,7 @@ public class AquariusWebModule : AbpModule
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<AquariusWebModule>();
+            options.AddMaps<AquariusHttpApiHostModule>();
         });
     }
 
@@ -81,7 +81,7 @@ public class AquariusWebModule : AbpModule
                 options.FileSets.ReplaceEmbeddedByPhysical<AquariusDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Aquarius.Domain"));
                 options.FileSets.ReplaceEmbeddedByPhysical<AquariusApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Aquarius.Application.Contracts"));
                 options.FileSets.ReplaceEmbeddedByPhysical<AquariusApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Aquarius.Application"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AquariusWebModule>(hostingEnvironment.ContentRootPath);
+                options.FileSets.ReplaceEmbeddedByPhysical<AquariusHttpApiHostModule>(hostingEnvironment.ContentRootPath);
             });
         }
     }
